@@ -14,6 +14,7 @@ extern void expapprox4(float *RESTRICT dst, const float *src);
 //
 // -------------------------------------------------------------------------------------
 // Fast approximate exp() function for Epiphany.
+//
 // Copyright 2015 Syoyo Fujita <syoyo@lighttransport.com>
 // Licensed under 2-clause BSD.
 //
@@ -24,29 +25,33 @@ extern void expapprox4(float *RESTRICT dst, const float *src);
 //
 //                          Enable range check       Disable range check
 //  -------------+--------+-------------------------+-------------------------------
-//  expapprox()  | scalar | 74 cycles,              | 54 cycles
+//  expapprox()  | scalar | 74 cycles               | 54 cycles
 //  expapprox4() | 4 SIMD | 32 cycles(128 in total) | 25 cycles(90 in total)
 //
 //
 //  - Reference
 //
 //  -------------+--------+---------------------------------------------------------
-//  expf()       | scalar | 141633 cycles(tooooo slow because of SW implementation?)
+//  expf()       | scalar | 141633 cycles(tooooo slow because of SW
+//  implementation?)
 //
-//  - Difference 
+//  - Difference
 //
-//    [-30.0, 30.0] Relative diff: ave = 0.000002, min = 0.000000, max = 0.000008
+//    [-30.0, 30.0] Relative diff: ave = 0.000002, min = 0.000000, max =
+//    0.000008
 //
 //  - Note
-//    * -mfp-mode=truncate may loose some precison, but emits more optimal assembly.
-//    * -mno-soft-compsf required to not emit software compare function, which breaks
+//    * -mfp-mode=truncate may loose some precison, but emits more optimal
+//    assembly.
+//    * -mno-soft-compsf required to not emit software compare function, which
+//    breaks
 //      some IEEE 754 compliance, but should be totally OK for approximate math
 //      functions.
 //
-//  
+//
 
-// If you are sure that input value for exp() is within [-88.0, 88.0],
-// You can disable range check, which makes faster evaluation of exp().
+// If you are sure that the input value for exp() is within [-88.0, 88.0],
+// you can disable range check, which results in faster evaluation.
 #define FMATH_EXP_DISABLE_RANGE_CHECK (0)
 
 // Based on http://gallium.inria.fr/blog/fast-vectorizable-math-approx/
