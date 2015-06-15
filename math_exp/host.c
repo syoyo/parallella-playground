@@ -108,8 +108,8 @@ int main(int argc, char *argv[])
 					fprintf(stderr, "??? TEST FAILED!\n");
 				} else {
 					fprintf(stderr, "[exp] Relative diff: "
-							"ave = %f, min = %f, "
-							"max = %f\n",
+							"ave = %e, min = %e, "
+							"max = %e\n",
 						*(float *)&result[1],
 						*(float *)&result[2],
 						*(float *)&result[3]);

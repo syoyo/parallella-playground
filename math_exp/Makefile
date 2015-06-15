@@ -6,7 +6,7 @@ CROSS_PREFIX=
 
 # How much the host do usleep() to wait a result from e-core?
 # Larger value -> longer test time, but can compute much accurate relative error.
-WAIT_MICROSECONDS=100000
+WAIT_MICROSECONDS=500000
 
 all:
 	echo Build HOST side application
